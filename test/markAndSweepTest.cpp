@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
             gc->pop();
             should_int(gc->getNumObjects()) be equal to(2);
             gc->garbageCollect();
-            should_int(gc->getStackSize()) be equal to(1);
+            should_int(gc->getNumObjects()) be equal to(1);
         });
 
         it("Push three values and pop a tuple", function(){
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
             gc->pushInt(23);
             gc->pushTuple();
             gc->garbageCollect();
-            should_int(gc->getStackSize()) be equal to(1);
+            should_int(gc->getNumObjects()) be equal to(1);
 
         });
 

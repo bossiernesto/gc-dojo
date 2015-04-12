@@ -3,6 +3,7 @@
 //
 
 #include "markandsweep.h"
+#include "color.cpp"
 #include <stdexcept>
 
 GCEnviroment::~GCEnviroment() {
@@ -14,6 +15,8 @@ void GCEnviroment::garbageCollect() {
     unsigned int objectsBeforeSweep = this->numObjects;
     this->markAll();
     this->sweep();
+    printf(ANSI_COLOR_CYAN "[Dojo-GC]: Mark and sweep passed. Before pass %d extisted. %d Removed. %d Remaining\n" ANSI_COLOR_RESET, objectsBeforeSweep,
+           objectsBeforeSweep - this->numObjects, this->numObjects);
 }
 
 void GCEnviroment::markAll() {
@@ -23,9 +26,10 @@ void GCEnviroment::markAll() {
 }
 
 void GCEnviroment::mark(Object object) {
-    if (!object or !this->isMarked(object))
+    if (!object or this->isMarked(object))
         return;
     object->mark = marked;
+
     if (object->type == obj_tuple) {
         this->mark(object->left);
         this->mark(object->right);

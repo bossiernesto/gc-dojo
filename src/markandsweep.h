@@ -14,7 +14,7 @@ enum ObjectType {
 };
 
 enum MarkStatus {
-    unmarked,
+    unmarked=0,
     marked
 };
 
